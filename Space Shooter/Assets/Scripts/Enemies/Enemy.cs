@@ -239,6 +239,7 @@ public class Enemy : MonoBehaviour
                 foreach (ShootingController gun in guns)
                 {
                     gun.Fire();
+                    
                 }
                 break;
         }

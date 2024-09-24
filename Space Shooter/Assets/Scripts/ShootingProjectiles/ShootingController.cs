@@ -146,7 +146,7 @@ public class ShootingController : MonoBehaviour
         {
             // Create the projectile
             GameObject projectileGameObject = Instantiate(projectilePrefab, transform.position, transform.rotation, null);
-
+            GetComponent<AudioSource>().Play();
             // Account for spread
             Vector3 rotationEulerAngles = projectileGameObject.transform.rotation.eulerAngles;
             rotationEulerAngles.z += Random.Range(-projectileSpread, projectileSpread);
@@ -156,6 +156,7 @@ public class ShootingController : MonoBehaviour
             if (projectileHolder != null)
             {
                 projectileGameObject.transform.SetParent(projectileHolder);
+                
             }
         }
     }
