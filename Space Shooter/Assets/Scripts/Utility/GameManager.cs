@@ -75,12 +75,9 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        if (instance == null)
-        {
+        if (instance == null){
             instance = this;
-        }
-        else
-        {
+        }else{
             DestroyImmediate(this);
         }
     }
