@@ -36,6 +36,9 @@ public class ShootingController : MonoBehaviour
     //The input manager which manages player input
     private InputManager inputManager = null;
 
+    public AudioSource audioSource;  // Explicit reference
+
+
     /// <summary>
     /// Description:
     /// Standard unity function that runs every frame
@@ -83,6 +86,11 @@ public class ShootingController : MonoBehaviour
                 Debug.LogError("Player Shooting Controller can not find an InputManager in the scene, there needs to be one in the " +
                     "scene for it to run");
             }
+        }
+        // Ensure the AudioSource is assigned
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
         }
     }
 
@@ -146,7 +154,18 @@ public class ShootingController : MonoBehaviour
         {
             // Create the projectile
             GameObject projectileGameObject = Instantiate(projectilePrefab, transform.position, transform.rotation, null);
-            GetComponent<AudioSource>().Play();
+            //GetComponent<AudioSource>().Play();
+
+            // Play the audio if AudioSource is valid
+            if (audioSource != null && audioSource.clip != null)
+            {
+                audioSource.Play();
+            }
+            else
+            {
+                //Debug.LogWarning("AudioSource or AudioClip is not assigned!");
+            }
+
             // Account for spread
             Vector3 rotationEulerAngles = projectileGameObject.transform.rotation.eulerAngles;
             rotationEulerAngles.z += Random.Range(-projectileSpread, projectileSpread);
